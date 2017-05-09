@@ -4,24 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>My first blog | Gorden&#39;s Blog</title>
+    <title>UVa 10054 欧拉回路 | Gorden&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Gorden Wang">
     
 
     
-    <meta name="description" content="这是第一篇blog : A+B Problem">
-<meta name="keywords" content="其他">
+    <meta name="description" content="训练指南 图论例题3">
+<meta name="keywords" content="图论,欧拉回路">
 <meta property="og:type" content="article">
-<meta property="og:title" content="My first blog">
-<meta property="og:url" content="https://Gorden2001.github.io/2017/05/06/My-first-blog/index.html">
+<meta property="og:title" content="UVa 10054 欧拉回路">
+<meta property="og:url" content="https://Gorden2001.github.io/2017/05/08/UVa10054-欧拉回路/index.html">
 <meta property="og:site_name" content="Gorden&#39;s Blog">
-<meta property="og:description" content="这是第一篇blog : A+B Problem">
-<meta property="og:updated_time" content="2017-05-08T11:04:08.080Z">
+<meta property="og:description" content="训练指南 图论例题3">
+<meta property="og:updated_time" content="2017-05-09T11:37:35.722Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="My first blog">
-<meta name="twitter:description" content="这是第一篇blog : A+B Problem">
+<meta name="twitter:title" content="UVa 10054 欧拉回路">
+<meta name="twitter:description" content="训练指南 图论例题3">
 
     
     <link rel="alternative" href="/atom.xml" title="Gorden&#39;s Blog" type="application/atom+xml">
@@ -80,14 +80,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/05/06/My-first-blog/" title="My first blog" itemprop="url">My first blog</a>
+      <a href="/2017/05/08/UVa10054-欧拉回路/" title="UVa 10054 欧拉回路" itemprop="url">UVa 10054 欧拉回路</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Gorden Wang" target="_blank" itemprop="author">Gorden Wang</a>
 		
   <p class="article-time">
-    <time datetime="2017-05-06T04:06:36.000Z" itemprop="datePublished"> Published 2017-05-06</time>
+    <time datetime="2017-05-08T10:56:59.000Z" itemprop="datePublished"> Published 2017-05-08</time>
     
   </p>
 </header>
@@ -96,12 +96,14 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题意："><span class="toc-number">1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Solution"><span class="toc-number">2.</span> <span class="toc-text">Solution:</span></a></li></ol>
 		
 		</div>
 		
-		<p>这是第一篇blog : A+B Problem<br><a id="more"></a></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> a, b ;</div><div class="line">	<span class="built_in">scanf</span> ( <span class="string">"%d%d"</span>, &amp;a, &amp;b ) ;</div><div class="line">	<span class="built_in">printf</span> ( <span class="string">"%d\n"</span>, a+b ) ;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+		<p>训练指南 图论例题3<br><a id="more"></a></p>
+<h3 id="题意："><a href="#题意：" class="headerlink" title="题意："></a>题意：</h3><p>n个珠子，每个珠子的两半由不同的颜色组成。 只有相同的颜色才能接在一起， 问能否组成一个项链。</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution:"></a>Solution:</h3><p>这一题，如果把每个珠子当成一个点建图的话，是做不出来的。我们可以换一种思路。<br>由于每一种颜色必须相邻，我们不妨将每种颜色作为一个点，而每一颗珠子代表某两颜色可以相邻，所以把每颗珠子作为边。这个就是“一笔画”的欧拉回路问题了<br>由于这些颜色编号比较鬼畜，要是直接从1开始dfs会WA</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;set&gt;</div><div class="line">#include &lt;cstdio&gt;</div><div class="line">#include &lt;cstdlib&gt;</div><div class="line">#include &lt;cstring&gt;</div><div class="line">#include &lt;map&gt;</div><div class="line">#include &lt;vector&gt;</div><div class="line">#include &lt;cmath&gt;</div><div class="line">#include &lt;queue&gt;</div><div class="line">#include &lt;stack&gt;</div><div class="line">#include &lt;algorithm&gt;</div><div class="line">#include &lt;cctype&gt;</div><div class="line">#include &lt;string&gt;</div><div class="line">#include &lt;ctime&gt;</div><div class="line"></div><div class="line">using namespace std ;</div><div class="line">bool Read ( int &amp;x, char c = getchar(), bool flag = false ) &#123;</div><div class="line">    for ( x = 0 ; !isdigit(c) ; c = getchar() ) if ( c == EOF ) return false ; else if ( c == '-' ) flag = true ;</div><div class="line">    for ( ; isdigit(c) ; c = getchar() ) x = 10*x + c - '0' ; if ( flag ) x = -x ;</div><div class="line">    return true ;</div><div class="line">&#125;</div><div class="line">const int maxn = 110, maxm = 2010 ;</div><div class="line">int m, d[maxn], a[maxn][maxn] ;</div><div class="line">vector &lt;int&gt; G[maxn] ;</div><div class="line">void init() &#123;</div><div class="line">	for ( int i = 0 ; i &lt; maxn ; i ++ )</div><div class="line">		d[i] = 0, G[i].clear() ;</div><div class="line">	memset ( a, 0, sizeof(a) ) ;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void dfs ( int x ) &#123;</div><div class="line">	int i, u ;</div><div class="line">	for ( i = 0 ; i &lt; G[x].size() ; i ++ ) &#123;</div><div class="line">		u = G[x][i] ;</div><div class="line">		if ( a[x][u] ) &#123;</div><div class="line">			--a[x][u] ;</div><div class="line">			--a[u][x] ;</div><div class="line">			dfs(u) ;</div><div class="line">			printf ( "%d %d\n", u, x ) ;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">set &lt;int&gt; c ;</div><div class="line">bool Judge() &#123;</div><div class="line">	set &lt;int&gt; :: iterator it ;</div><div class="line">	for ( it = c.begin() ; it != c.end() ; it ++ )</div><div class="line">		if ( d[*it]%2 ) return false ;</div><div class="line">	return true ;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main() &#123;</div><div class="line">#ifndef ONLINE_JUDGE</div><div class="line">	freopen ( "UVa10054.in", "r", stdin ) ;</div><div class="line">	freopen ( "UVa10054.out", "w", stdout ) ;</div><div class="line">#endif</div><div class="line">	int i, j, k, x, y, _case, _ ;</div><div class="line">	Read(_) ;</div><div class="line">	for ( _case = 1 ; _case &lt;= _ ; _case ++ ) &#123;</div><div class="line">		init() ; c.clear() ;</div><div class="line">		if ( _case != 1 ) puts("") ;</div><div class="line">		printf ( "Case #%d\n", _case ) ;</div><div class="line">		Read(m) ;</div><div class="line">		for ( i = 1 ; i &lt;= m ; i ++ ) &#123;</div><div class="line">			Read(x) ; Read(y) ;</div><div class="line">			G[x].push_back(y) ;</div><div class="line">			G[y].push_back(x) ;</div><div class="line">			c.insert(x) ; c.insert(y) ;</div><div class="line">			++ a[x][y] ; ++ a[y][x] ;</div><div class="line">			++d[x] ; ++d[y] ;</div><div class="line">		&#125;</div><div class="line">		if ( Judge() ) dfs(*c.begin()) ;</div><div class="line">		else puts("some beads may be lost") ;</div><div class="line">	&#125;</div><div class="line">	return 0 ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -110,7 +112,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/其他/">其他</a>
+  <span></span> <a href="/tags/图论/">图论</a><a href="/tags/欧拉回路/">欧拉回路</a>
   </div>
 
 </div>
@@ -119,7 +121,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://Gorden2001.github.io/2017/05/06/My-first-blog/" data-title="My first blog | Gorden&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="https://Gorden2001.github.io/2017/05/08/UVa10054-欧拉回路/" data-title="UVa 10054 欧拉回路 | Gorden&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -132,14 +134,14 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/05/07/Uva10047-搜索/" title="Uva10047 搜索">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Uva10047 搜索</span>
+
+<div class="next">
+<a href="/2017/05/07/Uva10047-搜索/"  title="Uva10047 搜索">
+ <strong>下一篇：</strong><br/> 
+ <span>Uva10047 搜索
+</span>
 </a>
 </div>
-
 
 </nav>
 
@@ -151,7 +153,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题意："><span class="toc-number">1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Solution"><span class="toc-number">2.</span> <span class="toc-text">Solution:</span></a></li></ol>
  
   </div>
 
