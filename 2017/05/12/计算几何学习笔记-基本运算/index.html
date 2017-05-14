@@ -18,7 +18,7 @@
 <meta property="og:url" content="https://Gorden2001.github.io/2017/05/12/计算几何学习笔记-基本运算/index.html">
 <meta property="og:site_name" content="Gorden&#39;s Blog">
 <meta property="og:description" content="平面向量的基本运算 点积 叉积 两个向量的位置关系 向量旋转 单位法线">
-<meta property="og:updated_time" content="2017-05-12T13:46:47.225Z">
+<meta property="og:updated_time" content="2017-05-13T11:56:32.012Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算几何学习笔记 基本运算">
 <meta name="twitter:description" content="平面向量的基本运算 点积 叉积 两个向量的位置关系 向量旋转 单位法线">
@@ -122,7 +122,8 @@
 <li>$ \vec a \times \vec b + \vec c \times \vec d = ( \vec a - \vec c ) \times ( \vec b - \vec d ) + \vec a \times \vec d + \vec c \times \vec b $ 注意叉积满足的是反交换律</li>
 </ul>
 <h2 id="两个向量的位置关系"><a href="#两个向量的位置关系" class="headerlink" title="两个向量的位置关系"></a>两个向量的位置关系</h2><p>不妨设$ u = \vec a \cdot \vec b $, $ v = \vec a \times \vec b $ .<br>那么，将$\vec a$作为新坐标系的y轴，x轴垂直指向$\vec a$的右侧。在这个新坐标系中点(u,v)所在象限就刻画了$\vec a,\vec b$的相对位置。（即$\vec b$指向$\vec a$的左前还是左后还是右前还是右后）。</p>
-<h2 id="向量旋转任意角"><a href="#向量旋转任意角" class="headerlink" title="向量旋转任意角"></a>向量旋转任意角</h2><p>设$\vec a = ( x_1, y_1 )$旋转$\theta$到$\vec b = ( x_2, y_2 )$<br>设$\alpha$是$\vec a$与x轴夹角（任意角）。<br>$$ x_2 = |\vec a| \cdot cos ( \theta + \alpha ) = |\vec a| \cdot ( cos\theta \cdot cos\alpha - sin\theta \cdot sin\alpha ) = |\vec a| \cdot ( \frac{x_1}{|\vec a|} - \frac{y_1}{|\vec a|} ) = x_1 \cdot cos\theta - y_1 \cdot sin\theta $$<br>$$ y_2 = |\vec a| \cdot sin ( \alpha + \theta ) = |\vec a| \cdot ( sin \alpha \cdot cos \theta + cos \alpha \cdot sin \theta ) = |\vec a| \cdot ( \frac{y_1 \cdot cos \theta }{ |\vec a| } + \frac{x_1 \cdot sin \theta }{|\vec a|} ) = x_1 \cdot sin \theta + y_1 \cdot cos \theta $$<br>所以，旋转后的向量是$ \vec b = ( x_1 \cdot cos \theta - y_1 \cdot sin \theta, x_1 \cdot sin \theta + y_1 \cdot cos \theta  ) $<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function">Vector <span class="title">Rotate</span> <span class="params">( Vector A, <span class="keyword">double</span> Rad )</span> </span>&#123; <span class="keyword">return</span> Vector ( A.x*<span class="built_in">cos</span>(Rad)-A.y*<span class="built_in">sin</span>(Rad), A.x*<span class="built_in">sin</span>(Rad)+A.y*<span class="built_in">cos</span>(Rad) ) ; &#125;</div></pre></td></tr></table></figure></p>
+<h2 id="向量旋转任意角"><a href="#向量旋转任意角" class="headerlink" title="向量旋转任意角"></a>向量旋转任意角</h2><p>设$\vec a = ( x_1, y_1 )$旋转$\theta$到$\vec b = ( x_2, y_2 )$<br>设$\alpha$是$\vec a$与x轴夹角（任意角）。<br>$$<br>x_2<br>= |\vec a| \cdot cos ( \theta + \alpha )<br>= |\vec a| \cdot ( cos\theta \cdot cos\alpha - sin\theta \cdot sin\alpha )<br>= |\vec a| \cdot ( \frac{x_1}{|\vec a|} - \frac{y_1}{|\vec a|} )<br>= x_1 \cdot cos\theta - y_1 \cdot sin\theta<br>$$</p>
+<p>$$ y_2 = |\vec a| \cdot sin ( \alpha + \theta ) = |\vec a| \cdot ( sin \alpha \cdot cos \theta + cos \alpha \cdot sin \theta ) = |\vec a| \cdot ( \frac{y_1 \cdot cos \theta }{ |\vec a| } + \frac{x_1 \cdot sin \theta }{|\vec a|} ) = x_1 \cdot sin \theta + y_1 \cdot cos \theta $$<br>所以，旋转后的向量是$ \vec b = ( x_1 \cdot cos \theta - y_1 \cdot sin \theta, x_1 \cdot sin \theta + y_1 \cdot cos \theta  ) $<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function">Vector <span class="title">Rotate</span> <span class="params">( Vector A, <span class="keyword">double</span> Rad )</span> </span>&#123; <span class="keyword">return</span> Vector ( A.x*<span class="built_in">cos</span>(Rad)-A.y*<span class="built_in">sin</span>(Rad), A.x*<span class="built_in">sin</span>(Rad)+A.y*<span class="built_in">cos</span>(Rad) ) ; &#125;</div></pre></td></tr></table></figure></p>
 <h2 id="单位法线"><a href="#单位法线" class="headerlink" title="单位法线"></a>单位法线</h2><p>向量的法线是通过逆时针旋转$90^。$得到的。<br>单位法线是指长度为单位长度。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">Vector <span class="title">Unit_Normal</span> <span class="params">( Vector A )</span> </span>&#123;</div><div class="line">	<span class="keyword">double</span> Length = get_length(A) ;</div><div class="line">	<span class="keyword">return</span> Vector ( -A.y/Length, A.x/Length ) ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
   
 	</div>
@@ -154,6 +155,14 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2017/05/13/无向图的割点和割边/" title="无向图的割点和割边">
+  <strong>上一篇：</strong><br/>
+  <span>
+  无向图的割点和割边</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2017/05/11/LA4255-差分约束/"  title="LA4255 差分约束">
@@ -192,7 +201,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/图论/" title="图论">图论<sup>3</sup></a></li>
+				<li><a href="/tags/图论/" title="图论">图论<sup>4</sup></a></li>
 			
 		
 			
@@ -209,6 +218,14 @@
 		
 			
 				<li><a href="/tags/欧拉回路/" title="欧拉回路">欧拉回路<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DFS/" title="DFS">DFS<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/割/" title="割">割<sup>1</sup></a></li>
 			
 		
 			
