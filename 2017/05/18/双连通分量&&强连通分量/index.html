@@ -4,24 +4,24 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
-    <title>UVa 10054 欧拉回路 | Gorden&#39;s Blog</title>
+    <title>双连通分量 &amp;&amp; 强连通分量 | Gorden&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Gorden Wang">
     
 
     
-    <meta name="description" content="训练指南 图论例题3 题意：n个珠子，每个珠子的两半由不同的颜色组成。 只有相同的颜色才能接在一起， 问能否组成一个项链。">
-<meta name="keywords" content="图论,欧拉回路">
+    <meta name="description" content="对双连通分量和强连通分量的简单介绍">
+<meta name="keywords" content="图论,割,DFS,双联通分量,强连通分量">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UVa 10054 欧拉回路">
-<meta property="og:url" content="https://Gorden2001.github.io/2017/05/08/UVa10054-欧拉回路/index.html">
+<meta property="og:title" content="双连通分量 &amp;&amp; 强连通分量">
+<meta property="og:url" content="https://Gorden2001.github.io/2017/05/18/双连通分量&&强连通分量/index.html">
 <meta property="og:site_name" content="Gorden&#39;s Blog">
-<meta property="og:description" content="训练指南 图论例题3 题意：n个珠子，每个珠子的两半由不同的颜色组成。 只有相同的颜色才能接在一起， 问能否组成一个项链。">
-<meta property="og:updated_time" content="2017-05-12T04:40:04.287Z">
+<meta property="og:description" content="对双连通分量和强连通分量的简单介绍">
+<meta property="og:updated_time" content="2017-05-19T11:21:00.809Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="UVa 10054 欧拉回路">
-<meta name="twitter:description" content="训练指南 图论例题3 题意：n个珠子，每个珠子的两半由不同的颜色组成。 只有相同的颜色才能接在一起， 问能否组成一个项链。">
+<meta name="twitter:title" content="双连通分量 &amp;&amp; 强连通分量">
+<meta name="twitter:description" content="对双连通分量和强连通分量的简单介绍">
 
     
     <link rel="alternative" href="/atom.xml" title="Gorden&#39;s Blog" type="application/atom+xml">
@@ -81,14 +81,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/05/08/UVa10054-欧拉回路/" title="UVa 10054 欧拉回路" itemprop="url">UVa 10054 欧拉回路</a>
+      <a href="/2017/05/18/双连通分量&&强连通分量/" title="双连通分量 &amp;&amp; 强连通分量" itemprop="url">双连通分量 &amp;&amp; 强连通分量</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Gorden Wang" target="_blank" itemprop="author">Gorden Wang</a>
 		
   <p class="article-time">
-    <time datetime="2017-05-08T10:56:59.000Z" itemprop="datePublished"> 发表于 2017-05-08</time>
+    <time datetime="2017-05-18T13:33:33.000Z" itemprop="datePublished"> 发表于 2017-05-18</time>
     
   </p>
 </header>
@@ -97,13 +97,15 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题意："><span class="toc-number">1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Solution"><span class="toc-number">2.</span> <span class="toc-text">Solution:</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#双连通分量"><span class="toc-number">1.</span> <span class="toc-text">双连通分量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#边双连通分量"><span class="toc-number">1.1.</span> <span class="toc-text">边双连通分量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#点双连通分量"><span class="toc-number">1.2.</span> <span class="toc-text">点双连通分量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#强连通分量"><span class="toc-number">2.</span> <span class="toc-text">强连通分量</span></a></li></ol>
 		
 		</div>
 		
-		<p>训练指南 图论例题3</p>
-<h3 id="题意："><a href="#题意：" class="headerlink" title="题意："></a>题意：</h3><p>n个珠子，每个珠子的两半由不同的颜色组成。 只有相同的颜色才能接在一起， 问能否组成一个项链。<br><a id="more"></a></p>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution:"></a>Solution:</h3><p>这一题，如果把每个珠子当成一个点建图的话，是做不出来的。我们可以换一种思路。<br>由于每一种颜色必须相邻，我们不妨将每种颜色作为一个点，而每一颗珠子代表某两颜色可以相邻，所以把每颗珠子作为边。这个就是“一笔画”的欧拉回路问题了<br>由于这些颜色编号比较鬼畜，要是直接从1开始dfs会WA<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cctype&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span> ;</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Read</span> <span class="params">( <span class="keyword">int</span> &amp;x, <span class="keyword">bool</span> flag = <span class="literal">false</span> )</span> </span>&#123;</div><div class="line">	<span class="keyword">char</span> c = getchar() ;</div><div class="line">	<span class="keyword">for</span> ( x = <span class="number">0</span> ; !<span class="built_in">isdigit</span>(c) ; c = getchar() ) <span class="keyword">if</span> ( c == EOF ) <span class="keyword">return</span> <span class="literal">false</span> ; <span class="keyword">else</span> <span class="keyword">if</span> ( c == <span class="string">'-'</span> ) flag = <span class="literal">true</span> ;</div><div class="line">	<span class="keyword">for</span> ( ; <span class="built_in">isdigit</span>(c) ; c = getchar() ) x = <span class="number">10</span>*x + c - <span class="string">'0'</span> ; <span class="keyword">if</span> ( flag ) x = -x ;</div><div class="line">	<span class="keyword">return</span> <span class="literal">true</span> ;</div><div class="line">&#125;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">110</span>, maxm = <span class="number">2010</span> ;</div><div class="line"><span class="keyword">int</span> m, d[maxn], a[maxn][maxn] ;</div><div class="line"><span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; G[maxn] ;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; maxn ; i ++ )</div><div class="line">		d[i] = <span class="number">0</span>, G[i].clear() ;</div><div class="line">	<span class="built_in">memset</span> ( a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a) ) ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span> <span class="params">( <span class="keyword">int</span> x )</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> i, u ;</div><div class="line">	<span class="keyword">for</span> ( i = <span class="number">0</span> ; i &lt; G[x].size() ; i ++ ) &#123;</div><div class="line">		u = G[x][i] ;</div><div class="line">		<span class="keyword">if</span> ( a[x][u] ) &#123;</div><div class="line">			--a[x][u] ;</div><div class="line">			--a[u][x] ;</div><div class="line">			dfs(u) ;</div><div class="line">			<span class="built_in">printf</span> ( <span class="string">"%d %d\n"</span>, u, x ) ;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">set</span> &lt;<span class="keyword">int</span>&gt; c ;</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Judge</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="built_in">set</span> &lt;<span class="keyword">int</span>&gt; :: iterator it ;</div><div class="line">	<span class="keyword">for</span> ( it = c.begin() ; it != c.end() ; it ++ )</div><div class="line">		<span class="keyword">if</span> ( d[*it]%<span class="number">2</span> ) <span class="keyword">return</span> <span class="literal">false</span> ;</div><div class="line">	<span class="keyword">return</span> <span class="literal">true</span> ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></div><div class="line">	freopen ( <span class="string">"UVa10054.in"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span> ) ;</div><div class="line">	freopen ( <span class="string">"UVa10054.out"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span> ) ;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line">	<span class="keyword">int</span> i, j, k, x, y, _case, _ ;</div><div class="line">	Read(_) ;</div><div class="line">	<span class="keyword">for</span> ( _case = <span class="number">1</span> ; _case &lt;= _ ; _case ++ ) &#123;</div><div class="line">		init() ; c.clear() ;</div><div class="line">		<span class="keyword">if</span> ( _case != <span class="number">1</span> ) <span class="built_in">puts</span>(<span class="string">""</span>) ;</div><div class="line">		<span class="built_in">printf</span> ( <span class="string">"Case #%d\n"</span>, _case ) ;</div><div class="line">		Read(m) ;</div><div class="line">		<span class="keyword">for</span> ( i = <span class="number">1</span> ; i &lt;= m ; i ++ ) &#123;</div><div class="line">			Read(x) ; Read(y) ;</div><div class="line">			G[x].push_back(y) ;</div><div class="line">			G[y].push_back(x) ;</div><div class="line">			c.insert(x) ; c.insert(y) ;</div><div class="line">			++ a[x][y] ; ++ a[y][x] ;</div><div class="line">			++d[x] ; ++d[y] ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> ( Judge() ) dfs(*c.begin()) ;</div><div class="line">		<span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">"some beads may be lost"</span>) ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+		<p>对双连通分量和强连通分量的简单介绍<br><a id="more"></a></p>
+<h1 id="双连通分量"><a href="#双连通分量" class="headerlink" title="双连通分量"></a>双连通分量</h1><p>双联通分量分为点双连通分量、边双连通分量。<br>是指无向图中任意两点经过点（边）至少有两条路径互相到达的极大子图。</p>
+<h2 id="边双连通分量"><a href="#边双连通分量" class="headerlink" title="边双连通分量"></a>边双连通分量</h2><p>在无向图中，边-双连通的极大子图称为边双连通分量。<br>不难发现一条性质：除了割边，其他每条边都仅仅属于一个边双。<br>于是，在求出割边后重新进行一次搜索，不走割边。得到的连通块就是边双。</p>
+<h2 id="点双连通分量"><a href="#点双连通分量" class="headerlink" title="点双连通分量"></a>点双连通分量</h2><p>在无向图中，点-双连通的极大子图称为点双连通分量。<br>大家可能想问，能否类比边双的求法，不走割点求连通块呢？<br>答案是不行的，因为任意割点都是至少两个点双的公共点。而且，点双之间最多只有一个公共点，并且肯定是割点，所以，处理点是有问题的。<br>考虑到dfs的顺序，我们可以使用一个栈保存边。满足条件的边的顶点就属于该点双。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span> <span class="params">( <span class="keyword">int</span> x, <span class="keyword">int</span> fa )</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> i, u, son = <span class="number">0</span> ;</div><div class="line">	low[x] = pre[x] = ++clk ;</div><div class="line">	<span class="keyword">for</span> ( i = be[x] ; i ; i = nxt[i] ) &#123;</div><div class="line">		u = to[i] ;</div><div class="line">		<span class="keyword">if</span> ( !pre[u] ) &#123;</div><div class="line">			++ son ;</div><div class="line">			stk.push( (edge)&#123;x,u&#125; ) ;</div><div class="line">			dfs(u,x) ;</div><div class="line">			low[x] = min( low[x], low[u] ) ;</div><div class="line">			<span class="keyword">if</span> ( low[u] &gt;= pre[x] ) &#123;</div><div class="line">				iscut[x] = <span class="number">1</span> ;</div><div class="line">				bcc[++cnt].clear() ;</div><div class="line">				edge ex ;</div><div class="line">				<span class="keyword">do</span> &#123;</div><div class="line">					ex = stk.top() ; stk.pop() ;</div><div class="line">					<span class="keyword">if</span> ( bccno[ex.u] != cnt ) bccno[ex.u] = cnt, bcc[cnt].push_back(ex.u) ;</div><div class="line">					<span class="keyword">if</span> ( bccno[ex.v] != cnt ) bccno[ex.v] = cnt, bcc[cnt].push_back(ex.v) ;</div><div class="line">				&#125; <span class="keyword">while</span> ( ex.u!=x || ex.v!=u ) ;</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">else</span> low[x] = min( low[x], pre[u] ) ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> ( fa&lt;<span class="number">0</span> &amp;&amp; son==<span class="number">1</span> ) iscut[x] = <span class="number">0</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="强连通分量"><a href="#强连通分量" class="headerlink" title="强连通分量"></a>强连通分量</h1><p>在有向图中，任意两点可以相互到达的极大子图称为强连通分量。<br>显然的一条性质是，将每一个强连通分量看作一个点，可以得到一个DAG（有向无环图）。<br>类似的，还是利用dfs的性质，用个栈存点就行了。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span> <span class="params">( <span class="keyword">int</span> x )</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> i, u ;</div><div class="line">	s.push(x) ;</div><div class="line">	<span class="keyword">int</span> lowx = pre[x] = ++clk, lowu ;</div><div class="line">	<span class="keyword">for</span> ( i = be[x] ; i ; i = nxt[i] ) &#123;</div><div class="line">		u = to[i] ;</div><div class="line">		<span class="keyword">if</span> ( !pre[u] ) &#123;</div><div class="line">			lowu = dfs(u) ;</div><div class="line">			lowx = min( lowx, lowu ) ;</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> ( !sccno[u] ) lowx = min( lowx, pre[u] ) ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> ( lowx == pre[x] ) &#123;</div><div class="line">		++cnt ;</div><div class="line">		<span class="keyword">while</span> ( !s.empty() ) &#123;</div><div class="line">			u = s.top() ;</div><div class="line">			s.pop() ;</div><div class="line">			sccno[u] = cnt ;</div><div class="line">			<span class="keyword">if</span> ( u == x ) <span class="keyword">break</span> ;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> lowx ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">find_scc</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i ++ )</div><div class="line">		<span class="keyword">if</span> ( !pre[i] ) dfs(i) ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -112,7 +114,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/图论/">图论</a><a href="/tags/欧拉回路/">欧拉回路</a>
+  <span></span> <a href="/tags/图论/">图论</a><a href="/tags/割/">割</a><a href="/tags/DFS/">DFS</a><a href="/tags/双联通分量/">双联通分量</a><a href="/tags/强连通分量/">强连通分量</a>
   </div>
 
 </div>
@@ -121,7 +123,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://Gorden2001.github.io/2017/05/08/UVa10054-欧拉回路/" data-title="UVa 10054 欧拉回路 | Gorden&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="https://Gorden2001.github.io/2017/05/18/双连通分量&&强连通分量/" data-title="双连通分量 &amp;&amp; 强连通分量 | Gorden&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -135,18 +137,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/05/11/LA4255-差分约束/" title="LA4255 差分约束">
+ <a href="/2017/05/19/LA3523-双连通分量/" title="LA3523 双连通分量">
   <strong>上一篇：</strong><br/>
   <span>
-  LA4255 差分约束</span>
+  LA3523 双连通分量</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/05/07/UVa10047-搜索/"  title="UVa 10047 搜索">
+<a href="/2017/05/15/UVa11374-最短路-枚举/"  title="UVa11374 最短路 枚举">
  <strong>下一篇：</strong><br/> 
- <span>UVa 10047 搜索
+ <span>UVa11374 最短路 枚举
 </span>
 </a>
 </div>
@@ -161,7 +163,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题意："><span class="toc-number">1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Solution"><span class="toc-number">2.</span> <span class="toc-text">Solution:</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#双连通分量"><span class="toc-number">1.</span> <span class="toc-text">双连通分量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#边双连通分量"><span class="toc-number">1.1.</span> <span class="toc-text">边双连通分量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#点双连通分量"><span class="toc-number">1.2.</span> <span class="toc-text">点双连通分量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#强连通分量"><span class="toc-number">2.</span> <span class="toc-text">强连通分量</span></a></li></ol>
  
   </div>
 
