@@ -4,24 +4,24 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
-    <title>LA4255 差分约束 | Gorden&#39;s Blog</title>
+    <title>高斯消元 | Gorden&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Gorden Wang">
     
 
     
-    <meta name="description" content="训练指南 图论例题4 题意有一个序列 ${a_i}$ ，令$S_{ij} = \sum_{k=i}^j a_i$。给出对于所有$ i,j ( 1 \le i \le j \le n ) $ $ S_{ij} $的正负号。求出满足条件的原序列${a_i}$。">
-<meta name="keywords" content="图论,差分约束">
+    <meta name="description" content="高斯消元求解线性方程组">
+<meta name="keywords" content="数学,矩阵,高斯消元">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LA4255 差分约束">
-<meta property="og:url" content="https://Gorden2001.github.io/2017/05/11/LA4255-差分约束/index.html">
+<meta property="og:title" content="高斯消元">
+<meta property="og:url" content="https://Gorden2001.github.io/2017/05/23/高斯消元/index.html">
 <meta property="og:site_name" content="Gorden&#39;s Blog">
-<meta property="og:description" content="训练指南 图论例题4 题意有一个序列 ${a_i}$ ，令$S_{ij} = \sum_{k=i}^j a_i$。给出对于所有$ i,j ( 1 \le i \le j \le n ) $ $ S_{ij} $的正负号。求出满足条件的原序列${a_i}$。">
-<meta property="og:updated_time" content="2017-05-18T13:53:39.125Z">
+<meta property="og:description" content="高斯消元求解线性方程组">
+<meta property="og:updated_time" content="2017-05-23T12:53:55.221Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LA4255 差分约束">
-<meta name="twitter:description" content="训练指南 图论例题4 题意有一个序列 ${a_i}$ ，令$S_{ij} = \sum_{k=i}^j a_i$。给出对于所有$ i,j ( 1 \le i \le j \le n ) $ $ S_{ij} $的正负号。求出满足条件的原序列${a_i}$。">
+<meta name="twitter:title" content="高斯消元">
+<meta name="twitter:description" content="高斯消元求解线性方程组">
 
     
     <link rel="alternative" href="/atom.xml" title="Gorden&#39;s Blog" type="application/atom+xml">
@@ -81,14 +81,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/05/11/LA4255-差分约束/" title="LA4255 差分约束" itemprop="url">LA4255 差分约束</a>
+      <a href="/2017/05/23/高斯消元/" title="高斯消元" itemprop="url">高斯消元</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Gorden Wang" target="_blank" itemprop="author">Gorden Wang</a>
 		
   <p class="article-time">
-    <time datetime="2017-05-11T10:10:48.000Z" itemprop="datePublished"> 发表于 2017-05-11</time>
+    <time datetime="2017-05-23T12:42:06.000Z" itemprop="datePublished"> 发表于 2017-05-23</time>
     
   </p>
 </header>
@@ -97,14 +97,22 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题意"><span class="toc-number">1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Solution"><span class="toc-number">2.</span> <span class="toc-text">Solution</span></a></li></ol>
+			
 		
 		</div>
 		
-		<p>训练指南 图论例题4</p>
-<h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>有一个序列 ${a_i}$ ，令$S_{ij} = \sum_{k=i}^j a_i$。<br>给出对于所有$ i,j ( 1 \le i \le j \le n ) $ $ S_{ij} $的正负号。求出满足条件的原序列${a_i}$。<br><a id="more"></a></p>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>不妨使用前缀和的技巧。<br>令$sum_i$是$a_i$的前缀和。<br>那么，对于$S_{ij} \lt 0 \Rightarrow sum_j-sum_{i-1} \lt 0 $，从j到i-1连边。其余同理。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span> ;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">30</span> ;</div><div class="line"><span class="keyword">int</span> n, m, v[maxn], ind[maxn] ;</div><div class="line"><span class="keyword">int</span> e, be[maxn], nxt[maxn&lt;&lt;<span class="number">2</span>], to[maxn&lt;&lt;<span class="number">2</span>] ;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span> <span class="params">( <span class="keyword">int</span> x, <span class="keyword">int</span> y )</span> </span>&#123;</div><div class="line">	to[++e] = y ;</div><div class="line">	nxt[e] = be[x] ;</div><div class="line">	be[x] = e ;</div><div class="line">	++ind[y] ;</div><div class="line">&#125;</div><div class="line"><span class="built_in">queue</span> &lt;<span class="keyword">int</span>&gt; Q ;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="built_in">memset</span> ( v, <span class="number">0</span>, <span class="keyword">sizeof</span>(v) ) ;</div><div class="line">	<span class="built_in">memset</span> ( ind, <span class="number">0</span>, <span class="keyword">sizeof</span>(ind) ) ;</div><div class="line">	<span class="built_in">memset</span> ( be, <span class="number">0</span>, <span class="keyword">sizeof</span>(be) ) ;</div><div class="line">	<span class="built_in">memset</span> ( nxt, <span class="number">0</span>, <span class="keyword">sizeof</span>(nxt) ) ;</div><div class="line">	<span class="built_in">memset</span> ( to, <span class="number">0</span>, <span class="keyword">sizeof</span>(to) ) ;</div><div class="line">	e = <span class="number">0</span> ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Sort</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> i, u, x ;</div><div class="line">	<span class="keyword">for</span> ( i = <span class="number">0</span> ; i &lt;= n ; i ++ ) </div><div class="line">		<span class="keyword">if</span> ( ind[i]==<span class="number">0</span> ) Q.push(i) ;</div><div class="line">	<span class="keyword">while</span> ( !Q.empty() ) &#123;</div><div class="line">		x = Q.front() ;</div><div class="line">		Q.pop() ;</div><div class="line">		<span class="keyword">for</span> ( i = be[x] ; i ; i = nxt[i] ) &#123;</div><div class="line">			u = to[i] ;</div><div class="line">			v[u] = min( v[u], v[x]<span class="number">-1</span> ) ;</div><div class="line">			<span class="keyword">if</span> ( --ind[u]==<span class="number">0</span> )</div><div class="line">				Q.push(u) ;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">for</span> ( i = <span class="number">1</span> ; i &lt; n ; i ++ )</div><div class="line">		<span class="built_in">printf</span> ( <span class="string">"%d "</span>, v[i]-v[i<span class="number">-1</span>] ) ;</div><div class="line">	<span class="built_in">printf</span> ( <span class="string">"%d\n"</span>, v[n]-v[n<span class="number">-1</span>] ) ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">char</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">char</span> c = getchar() ;</div><div class="line">	<span class="keyword">while</span> ( c != <span class="string">'+'</span> &amp;&amp; c != <span class="string">'-'</span> &amp;&amp; c != <span class="string">'0'</span> ) c = getchar() ;</div><div class="line">	<span class="keyword">return</span> c ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> _ ;</div><div class="line">	<span class="keyword">char</span> c ;</div><div class="line">	<span class="built_in">scanf</span> ( <span class="string">"%d"</span>, &amp;_ ) ;</div><div class="line">	<span class="keyword">while</span> ( _-- ) &#123;</div><div class="line">		init() ;</div><div class="line">		<span class="built_in">scanf</span> ( <span class="string">"%d"</span>, &amp;n ) ;</div><div class="line">		<span class="keyword">int</span> i, j, k ;</div><div class="line">		<span class="keyword">for</span> ( i = <span class="number">1</span> ; i &lt;= n ; i ++ )</div><div class="line">			<span class="keyword">for</span> ( j = i ; j &lt;= n ; j ++ ) &#123;</div><div class="line">				c = read() ;</div><div class="line">				<span class="keyword">if</span> ( c == <span class="string">'+'</span> )</div><div class="line">					add ( j, i<span class="number">-1</span> ) ;</div><div class="line">				<span class="keyword">else</span> <span class="keyword">if</span> ( c == <span class="string">'-'</span> )</div><div class="line">					add ( i<span class="number">-1</span>, j ) ;</div><div class="line">			&#125;</div><div class="line">		Sort() ;	</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+		<p>高斯消元求解线性方程组<br><a id="more"></a></p>
+<p>以前听着这个名字觉得好高级.今天研究了一下才发现就是初中的一堆加减消元嘛…..<br>为了方便,用矩阵存方程组.<br>简要步骤分为两步:</p>
+<ul>
+<li>加减消元,将矩阵化为倒三角形式(左下角的三角形区域为0)</li>
+<li>代入求解,从下往上一步步代</li>
+</ul>
+<p>有些细节:</p>
+<ul>
+<li>为了方便,不妨将当前行所求的未知数系数化为1</li>
+<li>注意判无解和无穷解<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span> ;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">110</span> ;</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Matrix</span> &#123;</span></div><div class="line">	<span class="keyword">double</span> s[maxn][maxn] ;</div><div class="line">	<span class="keyword">int</span> n ;</div><div class="line">	<span class="keyword">bool</span> sol ;</div><div class="line">	Matrix() &#123; sol = <span class="number">1</span> ; &#125;</div><div class="line">&#125; ;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span> <span class="params">( Matrix A )</span> </span>&#123;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= A.n ; i ++, <span class="built_in">puts</span>(<span class="string">""</span>) )</div><div class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> j = <span class="number">1</span> ; j &lt;= A.n+<span class="number">1</span> ; j ++ )</div><div class="line">			<span class="built_in">printf</span> ( <span class="string">"%lf "</span>, A.s[i][j] ) ;</div><div class="line">	<span class="built_in">puts</span>(<span class="string">""</span>) ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function">Matrix <span class="title">gsxy</span> <span class="params">( Matrix A )</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> i, j, k, pos ;</div><div class="line">	<span class="keyword">for</span> ( i = <span class="number">1</span> ; i &lt;= A.n ; i ++ ) &#123;</div><div class="line">		<span class="keyword">for</span> ( pos = i ; pos &lt;= A.n ; pos ++ ) &#123;</div><div class="line">			A.sol = <span class="number">0</span> ;</div><div class="line">			<span class="keyword">for</span> ( j = pos ; j &lt;= A.n ; j ++ )</div><div class="line">				<span class="keyword">if</span> ( <span class="built_in">fabs</span>(A.s[pos][j]) &gt; <span class="number">1e-8</span> ) A.sol = <span class="number">1</span> ; <span class="comment">//系数不是全0就行</span></div><div class="line">			<span class="comment">// 如果系数全0:</span></div><div class="line">			<span class="comment">// 若计算结果为0,有无穷解</span></div><div class="line">			<span class="comment">// 若计算结果不为0,无解</span></div><div class="line">			<span class="keyword">if</span> ( !A.sol ) <span class="keyword">return</span> A ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> ( j = i+<span class="number">1</span> ; j &lt;= A.n+<span class="number">1</span> ; j ++ )</div><div class="line">			A.s[i][j] /= A.s[i][i] ;</div><div class="line">		A.s[i][i] = <span class="number">1</span> ;</div><div class="line">		<span class="keyword">for</span> ( pos = i+<span class="number">1</span> ; pos &lt;= A.n ; pos ++ ) &#123;</div><div class="line">			<span class="keyword">for</span> ( j = i+<span class="number">1</span> ; j &lt;= A.n+<span class="number">1</span> ; j ++ )</div><div class="line">				A.s[pos][j] /= -A.s[pos][i] ;</div><div class="line">			A.s[pos][i] = <span class="number">-1</span> ;</div><div class="line">			<span class="keyword">for</span> ( j = i ; j &lt;= A.n+<span class="number">1</span> ; j ++ )</div><div class="line">				A.s[pos][j] += A.s[i][j] ;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">for</span> ( i = A.n<span class="number">-1</span> ; i ; i -- ) &#123;</div><div class="line">		<span class="keyword">for</span> ( j = i+<span class="number">1</span> ; j &lt;= A.n ; j ++ )</div><div class="line">			A.s[i][A.n+<span class="number">1</span>] -= A.s[i][j]*A.s[j][A.n+<span class="number">1</span>] ; <span class="comment">// 移项</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> A ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span> <span class="params">( Matrix A )</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> ( A.sol ) <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= A.n ; i ++ )</div><div class="line">		<span class="built_in">printf</span> ( <span class="string">"%.2lf\n"</span>, A.s[i][A.n+<span class="number">1</span>] ) ;</div><div class="line">	<span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">"No Solution"</span>) ; <span class="comment">// 由于这是洛谷上的高斯消元模板,这里无解和无穷解都是输出这个东西</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></div><div class="line">	freopen ( <span class="string">"gsxy.in"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span> ) ;</div><div class="line">	freopen ( <span class="string">"gsxy.out"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span> ) ;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line">	<span class="keyword">int</span> i, j, k ;</div><div class="line">	Matrix A ;</div><div class="line">	<span class="built_in">scanf</span> ( <span class="string">"%d"</span>, &amp;A.n ) ;</div><div class="line">	<span class="keyword">for</span> ( i = <span class="number">1</span> ; i &lt;= A.n ; i ++ )</div><div class="line">		<span class="keyword">for</span> ( j = <span class="number">1</span> ; j &lt;= A.n+<span class="number">1</span> ; j ++ )</div><div class="line">			<span class="built_in">scanf</span> ( <span class="string">"%lf"</span>, &amp;A.s[i][j] ) ;</div><div class="line">	output( gsxy(A) ) ;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -113,7 +121,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/图论/">图论</a><a href="/tags/差分约束/">差分约束</a>
+  <span></span> <a href="/tags/数学/">数学</a><a href="/tags/矩阵/">矩阵</a><a href="/tags/高斯消元/">高斯消元</a>
   </div>
 
 </div>
@@ -122,7 +130,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://Gorden2001.github.io/2017/05/11/LA4255-差分约束/" data-title="LA4255 差分约束 | Gorden&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="https://Gorden2001.github.io/2017/05/23/高斯消元/" data-title="高斯消元 | Gorden&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -135,19 +143,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/05/12/计算几何学习笔记-基本运算/" title="计算几何学习笔记 基本运算">
-  <strong>上一篇：</strong><br/>
-  <span>
-  计算几何学习笔记 基本运算</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/05/08/UVa10054-欧拉回路/"  title="UVa 10054 欧拉回路">
+<a href="/2017/05/22/POJ1679-最小生成树是否唯一-次小生成树/"  title="POJ1679 最小生成树是否唯一 次小生成树">
  <strong>下一篇：</strong><br/> 
- <span>UVa 10054 欧拉回路
+ <span>POJ1679 最小生成树是否唯一 次小生成树
 </span>
 </a>
 </div>
@@ -162,7 +162,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题意"><span class="toc-number">1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Solution"><span class="toc-number">2.</span> <span class="toc-text">Solution</span></a></li></ol>
+ 
  
   </div>
 
